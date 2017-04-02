@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
-import './App.css'
+import Radium from 'radium'
+
+const styles = {
+  fontFamily: 'sans-serif',
+  width: '75ch',
+  margin: 'auto'
+}
 
 class App extends Component {
   render () {
     return (
-      <div className='App'>
+      <div style={styles}>
 
         <h1>Как принимать решения</h1>
 
@@ -232,4 +238,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default Radium(App)
