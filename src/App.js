@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Radium from 'radium'
 
 import Excercise from './Excercise'
+import Textarea from './Textarea'
 
 const styles = {
   fontFamily: 'sans-serif',
@@ -77,7 +78,7 @@ class App extends Component {
           записали примеры, связанные с акразией или избеганием. От одного до
           трех решений.
         </p>
-        <textarea />
+        <Textarea />
 
         <Excercise title='Цели'>
           <p>
@@ -101,7 +102,7 @@ class App extends Component {
             запишите несколько ваших целей, а затем придумайте другие способы
             достичь эти цели.
           </p>
-          <textarea />
+          <Textarea />
         </Excercise>
 
         <Excercise title='Ограничения'>
@@ -129,7 +130,7 @@ class App extends Component {
             запишите несколько ограничений, определяющих доступные вам
             варианты, а затем придумайте, как обойти эти ограничения.
           </p>
-          <textarea />
+          <Textarea />
         </Excercise>
 
         <Excercise title='Количественная оценка'>
@@ -147,7 +148,7 @@ class App extends Component {
           <p>
             Запишите несколько количественных характеристик для вариантов вашего решения.
           </p>
-          <textarea />
+          <Textarea />
         </Excercise>
 
         <Excercise title='Confirmation bias'>
@@ -165,7 +166,7 @@ class App extends Component {
           <p>
             Запишите несколько контр-аргументов для вариантов вашего решения.
           </p>
-          <textarea />
+          <Textarea />
         </Excercise>
 
         <Excercise title='Внешнее влияние'>
@@ -192,7 +193,7 @@ class App extends Component {
             Запишите, какие внешние факторы могут помешать вам в ваших примерах
             решений.
           </p>
-          <textarea />
+          <Textarea />
 
         </Excercise>
 
@@ -207,7 +208,7 @@ class App extends Component {
           <p>
             Запишите, что бы вы посоветовали вашему другу в похожей ситуации
           </p>
-          <textarea />
+          <Textarea />
         </Excercise>
 
         <Excercise title='Подготовка к провалу'>
@@ -226,7 +227,7 @@ class App extends Component {
           <p>
             Придумайте "План Б" для вашего примера
           </p>
-          <textarea />
+          <Textarea />
         </Excercise>
 
         <Excercise title='Премортем'>
@@ -250,7 +251,7 @@ class App extends Component {
             провалилось
           </p>
 
-          <textarea />
+          <Textarea />
 
         </Excercise>
 
