@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import Radium from 'radium'
 
+import { connect } from 'react-redux'
+
+import { updateExample } from './state'
+
 import Excercise from './Excercise'
 import Textarea from './Textarea'
 
@@ -258,6 +262,22 @@ const excercises = [
   </Excercise>
 ]
 
+const Example = connect(state => ({example: state.example}))(({dispatch, example}) =>
+  <div>
+    <h2>Запишите 1-3 примера решений</h2>
+    <p>
+      Выберите решения, которые вам нужно будет принять в ближайшем
+      будущем. Можно выбрать уже совершенные решения, в которых вы были
+      неуверены или которые оказались неверны. Проверьте, что вы не
+      записали примеры, связанные с акразией или избеганием. От одного до
+      трех решений.
+    </p>
+    <Textarea onChange={e =>
+      dispatch(updateExample(e.target.value))} />
+    <i>{example}</i>
+  </div>
+)
+
 class App extends Component {
   renderActions (excercises) {
     const items = excercises.map(e =>
@@ -270,15 +290,8 @@ class App extends Component {
     return (
       <div style={styles}>
         {intro}
-        <h2>Запишите 1-3 примера решений</h2>
-        <p>
-          Выберите решения, которые вам нужно будет принять в ближайшем
-          будущем. Можно выбрать уже совершенные решения, в которых вы были
-          неуверены или которые оказались неверны. Проверьте, что вы не
-          записали примеры, связанные с акразией или избеганием. От одного до
-          трех решений.
-        </p>
-        <Textarea />
+
+        <Example />
 
         {excercises}
 
