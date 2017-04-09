@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Radium from 'radium'
 
 import { connect } from 'react-redux'
@@ -14,7 +14,7 @@ const styles = {
   margin: 'auto'
 }
 
-const intro = <div>
+const Intro = () => <div>
   <h1>Как принимать решения</h1>
 
   <p>
@@ -262,7 +262,7 @@ const excercises = [
   </Excercise>
 ]
 
-const Example = connect(state => ({example: state.example}))(({dispatch, example}) =>
+const Example = connect(({example}) => ({example}))(({dispatch, example}) =>
   <div>
     <h2>Запишите 1-3 примера решений</h2>
     <p>
@@ -278,43 +278,37 @@ const Example = connect(state => ({example: state.example}))(({dispatch, example
   </div>
 )
 
-class App extends Component {
-  renderActions (excercises) {
-    const items = excercises.map(e =>
-      <li key={e.key}>{e.props.action}</li>
-    )
-    return <ol>{items}</ol>
-  }
-
-  render () {
-    return (
-      <div style={styles}>
-        {intro}
-
-        <Example />
-
-        {excercises}
-
-        <h2>Что дальше?</h2>
-        <p>
-          Запишите или сохраните чеклист для принятия решений, так, чтобы он
-          был у вас с собой:
-        </p>
-        {this.renderActions(excercises)}
-        <p>
-          Убедитесь, что вы понимаете, что нужно делать в каждом из пунктов
-          (непонятные или не понравившиеся пункты можно убрать).
-        </p>
-        <p>
-          Вспомните ощущение "нерешительности", которое вы испытывали при
-          принятии трудного решения. Постарайтесь представить это ощущение, а
-          затем представьте, что вы открываете чеклист.
-          Представление конкретных ощущений поможет вам вспомнить об этих
-          техниках в нужный момент.
-        </p>
-      </div>
-    )
-  }
+const actions = (excercises) => {
+  const items = excercises.map(e =>
+    <li key={e.key}>{e.props.action}</li>
+  )
+  return <ol>{items}</ol>
 }
 
-export default Radium(App)
+export default Radium(() =>
+  <div style={styles}>
+    <Intro />
+
+    <Example />
+
+    {excercises}
+
+    <h2>Что дальше?</h2>
+    <p>
+      Запишите или сохраните чеклист для принятия решений, так, чтобы он
+      был у вас с собой:
+    </p>
+    {actions(excercises)}
+    <p>
+      Убедитесь, что вы понимаете, что нужно делать в каждом из пунктов
+      (непонятные или не понравившиеся пункты можно убрать).
+    </p>
+    <p>
+      Вспомните ощущение "нерешительности", которое вы испытывали при
+      принятии трудного решения. Постарайтесь представить это ощущение, а
+      затем представьте, что вы открываете чеклист.
+      Представление конкретных ощущений поможет вам вспомнить об этих
+      техниках в нужный момент.
+    </p>
+  </div>
+)
