@@ -3,7 +3,7 @@ import Radium from 'radium'
 
 import { connect } from 'react-redux'
 
-import { updateExample } from './state'
+import { pickState, updateExample } from './state'
 
 import Excercise from './Excercise'
 import Textarea from './Textarea'
@@ -73,7 +73,7 @@ const Intro = () => <div>
 
 const excercises = [
   e(Excercise, {
-    key: 'goals',
+    id: 'goals',
     title: 'Цели',
     action: 'Подумайте о целях',
     explanation: <div>
@@ -98,7 +98,7 @@ const excercises = [
   }),
 
   e(Excercise, {
-    key: 'restrictions',
+    id: 'restrictions',
     title: 'Ограничения',
     action: 'Проверьте ограничения',
     explanation: <div>
@@ -129,7 +129,7 @@ const excercises = [
   }),
 
   e(Excercise, {
-    key: 'quantification',
+    id: 'quantification',
     title: 'Количественная оценка',
     action: 'Получите количественную оценку',
     explanation: <div>
@@ -150,7 +150,7 @@ const excercises = [
   }),
 
   e(Excercise, {
-    key: 'confirmationBias',
+    id: 'confirmationBias',
     title: 'Confirmation bias',
     action: 'Ищите опровержение, а не подтверждение',
     explanation: <div>
@@ -171,7 +171,7 @@ const excercises = [
   }),
 
   e(Excercise, {
-    key: 'externalFactors',
+    id: 'externalFactors',
     title: 'Внешнее влияние',
     action: 'Избавьтесь от внешнего влияния',
     explanation: <div>
@@ -194,7 +194,7 @@ const excercises = [
   }),
 
   e(Excercise, {
-    key: 'outsideView',
+    id: 'outsideView',
     title: 'Взгляд снаружи',
     action: 'Посмотрите на ситуацию снаружи',
     explanation: <div>
@@ -210,7 +210,7 @@ const excercises = [
   }),
 
   e(Excercise, {
-    key: 'failurePlan',
+    id: 'failurePlan',
     title: 'Подготовка к провалу',
     action: 'Подготовьте "План Б"',
     explanation: <div>
@@ -232,7 +232,7 @@ const excercises = [
   }),
 
   e(Excercise, {
-    key: 'premortem',
+    id: 'premortem',
     title: 'Премортем',
     action: 'Проведите премортем',
     explanation: <div>
@@ -256,9 +256,9 @@ const excercises = [
       провалилось
     </p>
   })
-]
+].map(e => React.cloneElement(e, {key: e.props.id}))
 
-const Example = connect(({example}) => ({example}))(({dispatch, example}) =>
+const Example = connect(pickState('example'))(({dispatch, example}) =>
   <div>
     <h2>Запишите 1-3 примера решений</h2>
     <p>
@@ -278,7 +278,7 @@ const Example = connect(({example}) => ({example}))(({dispatch, example}) =>
 
 const actions = (excercises) => {
   const items = excercises.map(e =>
-    <li key={e.key}>{e.props.action}</li>
+    <li key={e.props.id}>{e.props.action}</li>
   )
   return <ol>{items}</ol>
 }
