@@ -12,15 +12,18 @@ const actionStyle = {
 }
 
 const Answer = connect(
-  pickState('example'),
+  pickState('example', 'answers'),
   {updateAnswer}
-)(({id, example, children, updateAnswer}) =>
+)(({id, example, answers, children, updateAnswer}) =>
   <div>
     <h3>Упражнение</h3>
     {children}
     Ваш пример<br />
     {example}
-    <Textarea onChange={e => updateAnswer(id, e.target.value)} />
+    <Textarea
+      onChange={e => updateAnswer(id, e.target.value)}
+      value={answers.get(id)}
+    />
   </div>
 )
 
