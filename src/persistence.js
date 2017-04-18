@@ -1,6 +1,5 @@
 import { omit } from 'ramda'
-import { Map } from 'immutable'
-import { createAction, handleAction } from 'redux-actions'
+import { createAction, createReducer } from 'redux-act'
 import reduceReducers from 'reduce-reducers'
 
 const loadState = createAction('LOAD_STATE')
@@ -17,11 +16,9 @@ export default db => createStore => (reducer, state) => {
   const store = createStore(
     reduceReducers(
       reducer,
-      handleAction(
-        'LOAD_STATE',
-        (state, {payload}) => state.merge(payload),
-        Map
-      )
+      createReducer({
+        [loadState]: (state, payload) => state.merge(payload)
+      })
     ),
   )
 

@@ -1,4 +1,4 @@
-import { createAction, handleActions } from 'redux-actions'
+import { createAction, createReducer } from 'redux-act'
 import { combineReducers } from 'redux-immutable'
 import { Record, Map } from 'immutable'
 
@@ -22,11 +22,14 @@ const State = Record({
 })
 
 export default combineReducers({
-  example: handleActions({
-    UPDATE_EXAMPLE: (state, {payload}) => payload
+
+  example: createReducer({
+    [updateExample]: (state, payload) => payload
   }, 'Your example'),
-  answers: handleActions({
-    UPDATE_ANSWER:
-      (answers, {payload: {key, answer}}) => answers.set(key, answer)
+
+  answers: createReducer({
+    [updateAnswer]:
+      (answers, {key, answer}) => answers.set(key, answer)
   }, Map())
+
 }, State)
