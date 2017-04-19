@@ -8,11 +8,8 @@ import { pickState, updateExample } from './state'
 import Excercise from './Excercise'
 import Textarea from './Textarea'
 
-const styles = {
-  fontFamily: 'sans-serif',
-  width: '75ch',
-  margin: 'auto'
-}
+import 'normalize.css/normalize.css'
+import './boxSizing.css'
 
 const Intro = () => <div>
   <h1>Как принимать решения</h1>
@@ -51,24 +48,6 @@ const Intro = () => <div>
     пользу от принятых решений.
   </p>
 
-  <h2>Примеры решений</h2>
-
-  <p> Методы хорошо работают для повседневных решений, когда нужно
-    выбирать из нескольких альтернатив.  Плохо подходят решения,
-    связанные с акразией или избеганием (отложить ли что-нибудь на потом,
-    сделать ли что-то, что нужно сделать, но вы не хотите), также не
-    подходят открытые решения (когда нет списка вариантов).  Несколько
-    примеров:
-
-    1) В какой ресторан пойти сегодня вечером на свидание?
-
-    2) Какую зимнюю куртку выбрать в магазине?
-
-    3) Ехать в Москву дневным или ночным поездом?
-
-    4) В каком отеле остановиться во время отпуска?
-
-  </p>
 </div>
 
 const excercises = [
@@ -258,23 +237,67 @@ const excercises = [
   })
 ].map(e => React.cloneElement(e, {key: e.props.id}))
 
-const Example = connect(pickState('example'))(({dispatch, example}) =>
+const columns = {
+  display: 'flex',
+  margin: '0 -0.5em'
+}
+
+const column = {
+  width: '50%',
+  padding: '0 0.5em'
+}
+
+const exampleStyle = {
+  margin: '-0.5em',
+  padding: '0.5em',
+  backgroundColor: '#eee'
+}
+
+const Example = Radium(connect(pickState('example'))(({dispatch, example}) =>
   <div>
-    <h2>Запишите 1-3 примера решений</h2>
+    <h2>Выберите решение</h2>
     <p>
-      Выберите решения, которые вам нужно будет принять в ближайшем
-      будущем. Можно выбрать уже совершенные решения, в которых вы были
-      неуверены или которые оказались неверны. Проверьте, что вы не
-      записали примеры, связанные с акразией или избеганием. От одного до
-      трех решений.
+      Методы хорошо работают для повседневных решений, когда нужно выбирать из
+      нескольких альтернатив.  Плохо подходят решения, связанные с акразией или
+      избеганием (отложить ли что-нибудь на потом, сделать ли что-то, что нужно
+      сделать, но вы не хотите), также не подходят открытые решения (когда нет
+      списка вариантов).
     </p>
-    <Textarea
-      onChange={e => dispatch(updateExample(e.target.value))}
-      value={example}
-    />
-    <i>{example}</i>
+    <div style={columns}>
+      <div style={column}>
+        <h3>Действие</h3>
+        <p>
+          Выберите решения, которые вам нужно будет принять в ближайшем
+          будущем. Можно выбрать уже совершенные решения, в которых вы были
+          неуверены или которые оказались неверны. Проверьте, что вы не
+          записали примеры, связанные с акразией или избеганием.
+        </p>
+        <Textarea
+          onChange={e => dispatch(updateExample(e.target.value))}
+          value={example}
+        />
+        <i>{example}</i>
+      </div>
+      <div style={column}>
+
+        <h3>Примеры</h3>
+
+        <p style={exampleStyle}>
+          В какой ресторан пойти сегодня вечером на свидание?
+        </p>
+        <p style={exampleStyle}>
+          Какую зимнюю куртку выбрать в магазине?
+        </p>
+        <p style={exampleStyle}>
+          Ехать в Москву дневным или ночным поездом?
+        </p>
+        <p style={exampleStyle}>
+          В каком отеле остановиться во время отпуска?
+        </p>
+      </div>
+    </div>
   </div>
-)
+))
 
 const actions = (excercises) => {
   const items = excercises.map(e =>
@@ -283,8 +306,14 @@ const actions = (excercises) => {
   return <ol>{items}</ol>
 }
 
+const textStyle = {
+  fontFamily: 'sans-serif',
+  width: '75ch',
+  margin: 'auto'
+}
+
 export default Radium(() =>
-  <div style={styles}>
+  <div style={textStyle}>
     <Intro />
 
     <Example />

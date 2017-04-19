@@ -5,8 +5,6 @@ import { Provider } from 'react-redux'
 import { createLogger } from 'redux-logger'
 import PouchDB from 'pouchdb'
 
-import 'normalize.css/normalize.css'
-
 import App from './App'
 import reduce from './state'
 import persistStore from './persistence'
