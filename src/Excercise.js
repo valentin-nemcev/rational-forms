@@ -7,6 +7,8 @@ import { updateAnswer, pickState } from './state'
 
 import Textarea from './Textarea'
 
+import { columns, column, bgHighlight} from './styles'
+
 const actionStyle = {
   fontStyle: 'italic'
 }
@@ -33,7 +35,14 @@ export default Radium((props) =>
     <p style={actionStyle}>
       {props.action}
     </p>
-    {props.explanation}
-    <Answer id={props.id}>{props.instruction}</Answer>
+    <div style={columns}>
+      <div style={column}>
+        {props.instruction}
+      </div>
+      <div style={column}>
+        {props.example}
+      </div>
+    </div>
+    <Answer id={props.id} />
   </div>
 )
